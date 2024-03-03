@@ -1,0 +1,6 @@
+/venv/
+/__pycache__/
+/user_dataform.csv
+/questionnaire_responses.csv
+/user_dataform.csv
+/config.py

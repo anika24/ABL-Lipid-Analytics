@@ -1,0 +1,10 @@
+flask==3.0.2
+requests==2.31.0
+googlemaps==4.10.0
+xport==3.6.1
+pyreadstat==1.2.6
+matplotlib==3.8.3
+scikit-learn==1.4.1.post1
+torch==2.2.1 
+torchaudio==2.2.1 
+torchvision==0.17.1

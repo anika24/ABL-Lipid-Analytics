@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flask demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css')}}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+</head>
+
+<body>
+    <div id="sidebar">
+        <a href="#" class="close-btn" onclick="closeNav()">&times;</a>
+        <a href="{{ url_for('userform') }}">General Data Form</a>
+        <a href="{{ url_for('questionnaire') }}">Diagnostic Questions</a>
+		<a href="{{ url_for('prediction') }}">Predict My Chances</a>
+        <a href="{{ url_for('data') }}">Access Data</a>
+        <a href="{{ url_for('location') }}">Resources</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+
+	<button class="button-uniform" onclick="openNav()">☰</button>
+	
+	<div class="header">
+
+		<p class="lead text-dark justified-text" style = "font-size: 1.2em;">
+			We have developed a preliminary model to predict LDL-c and Apo-B levels based on noninvasive medical data from the National Health and Nutrition Examination Survey.
+            The goal is that that our data collection tool will aid us in continually
+            improving these models. Please fill out the form below to receive your predictions. This information
+            will not be stored. 
+		</p>
+	</div>
+
+	<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <div class="scrollable-form-pred">
+            <p style="color: #cc0000; padding: 2px; font-size: 1.2em; font-weight: bold; text-align: center;">
+                Scroll through the form and submit at the end for your prediction!
+            </p>
+            <form action="{{ url_for('prediction')}}" method="post" class="custom-form">
+                <div class="gender-radio py-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="male" value="1" checked >
+                        <label class="form-check-label" for="male">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="female" value="2" required>
+                        <label class="form-check-label" for="female">Female</label>
+                    </div>
+                </div>
+
+                <label for="age" class="form-label">Age (Years)</label>
+                <input name="age" type="number" class="form-control" id="age" required>
+
+                <label for="SBP" class="form-label">Systolic Blood Pressure (mmHg)</label>
+                <input name="SBP" type="number" step="any" class="form-control" id="SBP" required>
+
+                <label for="DBP" class="form-label">Diastolic Blood Pressure (mmHg)</label>
+                <input name="DBP" type="number" step="any" class="form-control" id="DBP" required>
+
+                <label for="BMI" class="form-label"> BMI (kg/m^2)</label>
+                <input name="BMI" type="number" step="any" class="form-control" id="BMI" required>
+
+                <label for="height" class="form-label">Height (cm)</label>
+                <input name="ht" type="number" step="any" class="form-control" id="height" required>
+                    
+                <label for="waist" class="form-label">Waist Circumference (cm)</label>
+                <input name="waist" type="number" step="any" class="form-control" id="waist" required>
+
+                <label for="sag-abdominal" class="form-label"> Saggital Abdominal Diameter (cm)</label>
+                <input name="sag" type="number" step="any" class="form-control" id="hip" required>
+
+                <label for="health" class="form-label">What is your general health condition?</label> <br>
+                    <input type="radio" id="health-1" name="health" value="1" required>
+                    <label for="health-1"> Excellent </label>
+                    <input type="radio" id="health-2" name="health" value="2">
+                    <label for="health-2"> Very good</label> <br>
+                    <input type="radio" id="health-3" name="health" value="3">
+                    <label for="health-3"> Good </label>
+                    <input type="radio" id="health-4" name="health" value="4">
+                    <label for="health-4"> Fair </label> <br>
+                    <input type="radio" id="health-5" name="health" value="5">
+                    <label for="health-5"> Poor </label> <br>
+
+                <label for="seeing" class="form-label">Do you have difficulty seeing?</label> <br>
+                    <input type="radio" id="seeing-yes" name="seeing" value="1" required>
+                    <label for="seeing-yes"> Yes</label>
+                    <input type="radio" id="seeing-no" name="seeing" value="2">
+                    <label for="seeing-no"> No</label> <br>
+
+                <label for="walking" class="form-label">Do you have difficulty walking?</label> <br>
+                    <input type="radio" id="walking-yes" name="walking" value="1" required>
+                    <label for="walking-yes"> Yes</label>
+                    <input type="radio" id="walking-no" name="walking" value="2">
+                    <label for="walking-no"> No</label> <br>
+
+                <label for="anemia" class="form-label">Are you taking anemia medicine?</label> <br>
+                    <input type="radio" id="anemia-yes" name="anemia" value="1" required>
+                    <label for="anemia-yes"> Yes</label>
+                    <input type="radio" id="anemia-no" name="anemia" value="2">
+                    <label for="anemia-no"> No</label> <br>
+
+                <label for="jaundice" class="form-label">Has a doctor ever told you you have jaundice?</label> <br>
+                    <input type="radio" id="jaundice-yes" name="jaundice" value="1" required>
+                    <label for="jaundice-yes"> Yes</label>
+                    <input type="radio" id="jaundice-no" name="jaundice" value="2">
+                    <label for="jaundice-no"> No</label> <br>
+
+                <label for="liver" class="form-label">Has a doctor ever told you you have a liver condition?</label> <br>
+                    <input type="radio" id="liver-yes" name="liver" value="1" required>
+                    <label for="liver-yes"> Yes</label>
+                    <input type="radio" id="liver-no" name="liver" value="2">
+                    <label for="liver-no"> No</label> <br>
+
+                <label for="heart" class="form-label">Has a doctor ever told you you have coronary heart disease?</label> <br>
+                    <input type="radio" id="heart-yes" name="heart" value="1" required>
+                    <label for="heart-yes"> Yes</label>
+                    <input type="radio" id="heart-no" name="heart" value="2">
+                    <label for="heart-no"> No</label> <br> <br>
+
+
+                <button type="submit" class="btn btn-primary">Get my results!</button>
+            </form>
+        </div>
+
+        <br>
+
+        <div style="text-align: center;">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <div style="font-size: 20px; font-weight: bold; color: rgb(16, 97, 49);">
+                    {{ message }}
+                </div> <br>
+                {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+	</div>
+
+	<script>
+		function openNav() {
+			document.getElementById("sidebar").style.width = "190px";
+			document.getElementById("main-content").style.marginLeft = "190px";
+		}
+		
+		function closeNav() {
+			document.getElementById("sidebar").style.width = "0";
+			document.getElementById("main-content").style.marginLeft = "0";
+		}
+	</script>
+
+
+</body>
+
+</html>

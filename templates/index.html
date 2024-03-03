@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Page</title>
+<link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+
+<div>
+  <div id="sidebar">
+      <a href="#" class="close-btn" onclick="closeNav()">&times;</a>
+      <a href="{{ url_for('index') }}">Home</a>
+  </div>
+
+  <button class="button-uniform" onclick="openNav()">☰</button>
+
+  <div class="container">
+    <div class="left">
+      <div class="text-container">
+          <div class="logo">
+          <img src="static/images/logo.png" alt="ABLDataCollection Logo">
+          <h2>ABLDataCollection</h2>
+          </div>
+          <h1>Lipid Analytics</h1>
+          <p style = "font-size: 10; font-family:Verdana, Geneva, Tahoma, sans-serif; font-style: italic;"> Predict your lipid levels </p>
+          <p style = "font-size: 10; font-family:Verdana, Geneva, Tahoma, sans-serif; font-style: italic;"> Contribute data for research </p> 
+          <p style = "font-size: 10; font-family:Verdana, Geneva, Tahoma, sans-serif; font-style: italic;"> Advance the study of abetalipoproteinemia (ABL) </p>
+          <div class="buttons">
+          <a href = "{{ url_for('signup') }}" class="button">Sign Up</a>
+          <a href = "{{ url_for('login') }}" class="button">Log In</a>
+          </div>
+      </div>
+    </div>
+    <div class="right">
+      <img src="static/images/abl-home.png" alt="Placeholder" style="max-width: 110%;">
+    </div>
+  </div>
+</div>
+
+<script>
+  function openNav() {
+    document.getElementById("sidebar").style.width = "110px";
+    document.getElementById("main-content").style.marginLeft = "110px";
+  }
+  
+  function closeNav() {
+    document.getElementById("sidebar").style.width = "0";
+    document.getElementById("main-content").style.marginLeft = "0";
+  }
+</script>
+
+</body>
+</html>

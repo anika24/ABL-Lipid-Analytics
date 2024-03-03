@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flask demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+</head>
+
+<body>
+    <div id="sidebar">
+        <a href="#" class="close-btn" onclick="closeNav()">&times;</a>
+        <a href="{{ url_for('userform') }}">General Data Form</a>
+        <a href="{{ url_for('questionnaire') }}">Diagnostic Questions</a>
+        <a href="{{ url_for('prediction') }}">Predict My Chances</a>
+        <a href="{{ url_for('data') }}">Access Data</a>
+        <a href="{{ url_for('location') }}">Resources</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+
+    <button class="button-uniform" onclick="openNav()">☰</button>
+
+    <div class="header">
+
+        <h1 class="display-4 text-warning" style="font-size: 2.0em;">Welcome!</h1>
+        <p class="lead text-dark justified-text" style="font-size: 1.1em;">
+            Please fill out the following form if you have been tested for LDL-c or Apo-B levels.
+            We are aggregating data in efforts to further study the rare disease abetalipoproteinemia.
+            If you do not have these measurements, feel free to explore our other functionalities!
+        </p>
+        <p style="font-size: small; color: red;">
+            * Your answers will be documented and accessible to the public, but your personal identification will remain
+            separate from your responses.
+        </p>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <div>
+            <div class="scrollable-form">
+                <p style="color: #cc0000; padding: 2px; font-size: 1.2em; font-weight: bold; text-align: center;">
+                    Scroll through the form and submit at the end!
+                </p>
+                <form action="{{ url_for('userform')}}" method="post" class="custom-form">
+
+                    <label for="ldlc" class="form-label">LDL-c (mm/dL) </label>
+                    <input name="ldlc" type="number" class="form-control" id="ldlc" required>
+
+                    <label for="apob" class="form-label"> Apo-B (mm/dL) </label>
+                    <input name="apob" type="number" class="form-control" id="apob">
+
+                    <div class="gender-radio py-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="male" value="Male" checked>
+                            <label class="form-check-label" for="male">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
+                            <label class="form-check-label" for="female">Female</label>
+                        </div>
+                    </div>
+
+                    <label for="age" class="form-label">Age (Years)</label>
+                    <input name="age" type="number" class="form-control" id="age" required>
+
+                    <label for="SBP" class="form-label">Systolic Blood Pressure (mmHg)</label>
+                    <input name="SBP" type="number" step="any" class="form-control" id="SBP" required>
+
+                    <label for="DBP" class="form-label">Diastolic Blood Pressure (mmHg)</label>
+                    <input name="DBP" type="number" step="any" class="form-control" id="DBP" required>
+
+                    <label for="race" class="form-label">Race/Ethnicity</label>
+                    <div class="race-checkboxes">
+                        <div class="form-check">
+                            <input type="radio" id="white" name="race" value="White" class="form-check-input">
+                            <label for="white" class="form-check-label"> White/Caucasian</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="black" name="race" value="Black" class="form-check-input">
+                            <label for="black" class="form-check-label"> Black or African</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="hispanic" name="race" value="Hispanic" class="form-check-input">
+                            <label for="hispanic" class="form-check-label"> Hispanic, Latino, or Mexican Origin</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="middle-eastern" name="race" value="Middle Eastern"
+                                class="form-check-input">
+                            <label for="middle-eastern" class="form-check-label"> Middle Eastern</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="native-american" name="race" value="Native American"
+                                class="form-check-input">
+                            <label for="native-american" class="form-check-label"> American Indian or Alaska
+                                Native</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="asian" name="race" value="East Asian" class="form-check-input">
+                            <label for="asian" class="form-check-label"> Chinese, Japanese, Vietnamese, or
+                                Korean</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="other-asian" name="race" value="South Asian"
+                                class="form-check-input">
+                            <label for="other-asian" class="form-check-label"> Other Asian (Pakistani, Cambodian,
+                                Indian, etc.)</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="multiracial" name="race" value="Multiracial" class="form-check-input">
+                            <label for="multiracial" class="form-check-label"> Multiracial</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="other" name="race" value="Other" class="form-check-input">
+                            <label for="other" class="form-check-label"> Other</label>
+                        </div>
+                    </div>
+
+                    <label for="userWeight" class="form-label">Weight (kg)</label>
+                    <input name="userWeight" type="number" step="any" class="form-control" id="userWeight" required>
+                    <label for="userHeight" class="form-label">Height (cm)</label>
+                    <input name="userHeight" type="number" step="any" class="form-control" id="userHeight" required>
+                    <label for="userEyesight" class="form-label">Eyesight (i.e. 20/20, 20/15, 15/15)</label>
+                    <input name="userEyesight" class="form-control" id="userEyesight" required>
+                    <label for="userWaist" class="form-label">Waist Circumference (cm)</label>
+                    <input name="userWaist" type="number" step="any" class="form-control" id="userWaist" required>
+                    <label for="userHip" class="form-label">Hip Circumference (cm)</label>
+                    <input name="userHip" type="number" step="any" class="form-control" id="userHip" required>
+
+                    <div class="question-container" data-question="covid">
+                        <label for="covid" class="form-label">Have you ever contracted COVID-19?</label> <br>
+                        <input type="radio" id="covid-yes" name="covid" value="Yes" required>
+                        <label for="covid-yes"> Yes</label>
+                        <input type="radio" id="covid-no" name="covid" value="No">
+                        <label for="covid-no"> No</label> <br>
+                    </div> <br>
+
+                    <div class="question-container" data-question="covid_blood">
+                        <label for="covid_blood" class="form-label">Did you receive bloodwork after a positive COVID-19 test result?</label> <br>
+                        <input type="radio" id="covid2-yes" name="covid_blood" value="Yes" required>
+                        <label for="covid2-yes"> Yes</label>
+                        <input type="radio" id="covid2-no" name="covid_blood" value="No">
+                        <label for="covid2-no"> No</label> <br>
+                    </div> <br>
+
+                    <div class="question-container" data-question="disease">
+                        <label for="disease" class="form-label">Have you ever been diagnosed with a liver disease, heart disease, or autoimmune disease?</label> <br>
+                        <input type="radio" id="disease-yes" name="disease" value="Yes" required>
+                        <label for="disease-yes"> Yes</label>
+                        <input type="radio" id="disease-no" name="disease" value="No">
+                        <label for="disease-no"> No</label> <br>
+                    </div> <br>
+
+                    <div class="question-container" data-question="thyroid">
+                        <label for="thyroid" class="form-label">Have you ever been tested for a thyroid disease?</label> <br>
+                        <input type="radio" id="thyroid-yes" name="thyroid" value="Yes" required>
+                        <label for="thyroid-yes"> Yes</label>
+                        <input type="radio" id="thyroid-no" name="thyroid" value="No">
+                        <label for="thyroid-no"> No</label> <br>
+                    </div> <br>
+
+                    <div class="question-container" data-question="chemo">
+                        <label for="chemo" class="form-label">Have you or someone close to you ever undergone chemotherapy?</label> <br>
+                        <input type="radio" id="chemo-yes" name="chemo" value="Yes" required>
+                        <label for="chemo-yes"> Yes</label>
+                        <input type="radio" id="chemo-no" name="chemo" value="No">
+                        <label for="chemo-no"> No</label> <br>
+                    </div> <br>
+
+                    <div class="question-container" data-question="blood">
+                        <label for="blood" class="form-label">Do you have access to any recent bloodwork results?</label> <br>
+                        <input type="radio" id="blood-yes" name="blood" value="Yes" required>
+                        <label for="blood-yes"> Yes</label>
+                        <input type="radio" id="blood-no" name="blood" value="No">
+                        <label for="blood-no"> No</label> <br>
+                    </div><br>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+
+            <br>
+
+            <div style="text-align: center;">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div style="font-size: 18px; font-style: bold; color: rgb(66, 31, 100);">
+                        {{ message}}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("sidebar").style.width = "190px";
+            document.getElementById("main-content").style.marginLeft = "190px";
+        }
+
+        function closeNav() {
+            document.getElementById("sidebar").style.width = "0";
+            document.getElementById("main-content").style.marginLeft = "0";
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function addInputFields(question, guideText, fieldType) {
+                var questionContainer = question.closest('.question-container');
+                var existingFields = questionContainer.querySelectorAll('.new-fields');
+
+                // Only add the input fields if they don't already exist
+                if (existingFields.length === 0) {
+                    var fields = document.createElement('div');
+                    fields.setAttribute('class', 'new-fields');
+
+                    // Add descriptive text for guidance
+                    var guideTextNode = document.createElement('p');
+                    guideTextNode.textContent = guideText; // Set guide text based on parameter
+                    fields.appendChild(guideTextNode);
+
+                    // Define input field options based on question type
+                    var fieldOptions = getFieldOptions(questionContainer.dataset.question, fieldType);
+                    if (fieldOptions && fieldOptions.length > 0) {
+                        // Create input fields
+                        fieldOptions.forEach(function (option) {
+                            if (fieldType === 'radio') {
+                                var radio = document.createElement('input');
+                                radio.setAttribute('type', 'radio');
+                                radio.setAttribute('name', option.name);
+                                radio.setAttribute('id', option.id);
+                                radio.setAttribute('value', option.value);
+
+                                var label = document.createElement('label');
+                                label.setAttribute('for', 'covid_case');
+                                label.textContent = option.placeholder;
+
+                                fields.appendChild(radio);
+                                fields.appendChild(label);
+                                fields.appendChild(document.createElement('br'));
+                            } else if (fieldType === 'input') {
+                                var inputField = document.createElement('input');
+                                inputField.setAttribute('type', 'number');
+                                inputField.setAttribute('step', 'any');
+                                inputField.setAttribute('name', option.name);
+                                inputField.setAttribute('placeholder', option.placeholder);
+                                inputField.removeAttribute('disabled'); // Ensure the input field is enabled
+
+                                fields.appendChild(inputField);
+                                fields.appendChild(document.createElement('br'));
+                            }
+                        });
+                    }
+
+                    questionContainer.appendChild(fields);
+                }
+            }
+
+            function getFieldOptions(questionType, fieldType) {
+                // Define input field options based on question type
+                switch (questionType) {
+                    case 'covid':
+                        return (fieldType === 'radio') ? [
+                            { id: 'asymptomatic', name: 'covid_case', placeholder: 'Asymptomatic (no symptoms)', value: 'asymptomatic'},
+                            { id: 'mild-to-moderate', name: 'covid_case', placeholder: 'Mild-to-moderate ( fever, fatigue, cough, sore throat, headache)',  value: 'mild/moderate'},
+                            { id: 'severe', name: 'covid_case', placeholder: 'Severe (high fever, difficulty breathing, persistent pain or pressure in the chest)',  value: 'severe'},
+                            { id: 'critical case', name: 'covid_case', placeholder: 'Critical Case (sepsis, respiratory failure, organ failure)',  value: 'critical'}
+                        ] : null;
+                        break;
+                    case 'covid_blood':
+                        return (fieldType === 'input') ? [
+                            { name: 'IL-6', placeholder: 'IL-6 levels (pg/mL)'}
+                        ] : null;
+                        break;
+                    case 'disease':
+                        return (fieldType === 'input') ? [
+                            { name: 'CPR', placeholder: 'CPR levels' }
+                        ] : null;
+                        break;
+                    case 'thyroid':
+                        return (fieldType === 'input') ? [
+                            { name: 'T3', placeholder: 'T3 levels (ng/dL)' },
+                            { name: 'T4', placeholder: 'T4 levels (mcg/dL)' },
+                            { name: 'TSH', placeholder: 'TSH levels (mlU/L)' }
+                        ] : null;
+                        break;
+                    case 'chemo':
+                        return (fieldType === 'input') ? [
+                            { name: 'iron', placeholder: 'Iron (mcg/dL)' },
+                            { name: 'folate', placeholder: 'Folate (ng/mL)' },
+                            { name: 'Vitamin B12', placeholder: 'Vitamin B12 (pmol/L)' },
+                            { name: 'Red blood cell count', placeholder: 'RBC count (cells/mcL)' },
+                            { name: 'White blood cell count', placeholder: 'WBC count (cmm)' },
+                            { name: 'lactate dehydrognase', placeholder: 'Lactate dehydrog.(U/L)' },
+                            { name: 'bilirubin', placeholder: 'Bilirubin (umol/L)' },
+                            { name: 'albumin', placeholder: 'Albumin (g/L)' }
+                        ] : null;
+                        break;
+                    case 'blood':
+                        return (fieldType === 'input') ? [
+                            { name: 'iron', placeholder: 'Iron (mcg/dL)' },
+                            { name: 'folate', placeholder: 'Folate (ng/mL)' },
+                            { name: 'Vitamin B12', placeholder: 'Vitamin B12 (pmol/L)' },
+                            { name: 'Red blood cell count', placeholder: 'RBC count (cells/mcL)' },
+                            { name: 'White blood cell count', placeholder: 'WBC count (cmm)' },
+                            { name: 'lactate dehydrognase', placeholder: 'Lactate dehydrog.(U/L)' },
+                            { name: 'bilirubin', placeholder: 'Bilirubin (umol/L)' },
+                            { name: 'albumin', placeholder: 'Albumin (g/L)' }
+                            
+                        ] : null;
+                        break;
+                    // Add cases for other question types as needed
+                    default:
+                        return null;
+                }
+            }
+
+            var lastFiveQuestions = document.querySelectorAll('input[name="covid"], input[name="covid_blood"], input[name="disease"], input[name="thyroid"], input[name="chemo"], input[name="blood"]');
+
+            lastFiveQuestions.forEach(function(question) {
+                question.addEventListener('change', function() {
+                    var questionContainer = question.closest('.question-container');
+                    var existingFields = questionContainer.querySelectorAll('.new-fields');
+
+                    if (question.value === 'Yes') {
+                        var guideText = ''; // Initialize guide text
+                        var fieldType;
+                        switch (question.name) {
+                            case 'covid':
+                                guideText = 'Please select the severity of your case of COVID-19:';
+                                fieldType = 'radio'; // Specify the field type
+                                break;
+                                
+                            case 'covid_blood':
+                                guideText = 'If you have access to the bloodwork that was done upon receiving a positive COVID-19 test, enter the following:';
+                                fieldType = 'input'; // Specify the field type
+                                break;
+                            
+                            case 'disease':
+                                guideText = 'If you have access to the bloodwork that was done upon diagnosis, enter C-reactive protein levels (CPR) below:';
+                                fieldType = 'input'; // Specify the field type
+                                break;
+                            case 'thyroid':
+                                guideText = 'If you have access to the bloodwork that was done upon testing, enter the following information:';
+                                fieldType = 'input'; // Specify the field type
+                                break;
+                            case 'chemo':
+                                guideText = 'Please enter the following from bloodwork results during the chemotherapy:';
+                                fieldType = 'input'; // Specify the field type
+                                break;
+                            case 'blood':
+                                guideText = 'Please enter the following from your bloodwork, if available:';
+                                fieldType = 'input'; // Specify the field type
+                                break;
+                            // Add cases for other question names as needed
+                            default:
+                                guideText = 'Please enter all applicable information:';
+                                fieldType = 'input'; // Default to input for other questions
+                                break;
+                        }
+                        addInputFields(question, guideText, fieldType); // Pass the field type
+                    } else {
+                        existingFields.forEach(function(fields) {
+                            fields.remove();
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var ldlcInput = document.getElementById('ldlc');
+            var apobInput = document.getElementById('apob');
+
+            ldlcInput.addEventListener('input', function () {
+                if (ldlcInput.value !== '') {
+                    apobInput.removeAttribute('required');
+                } else {
+                    apobInput.setAttribute('required', 'required');
+                }
+            });
+
+            apobInput.addEventListener('input', function () {
+                if (apobInput.value !== '') {
+                    ldlcInput.removeAttribute('required');
+                } else {
+                    ldlcInput.setAttribute('required', 'required');
+                }
+            });
+        });
+    </script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Maps Demo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+</head>
+<body>
+    <div id="sidebar">
+        <a href="#" class="close-btn" onclick="closeNav()">&times;</a>
+        <a href="{{ url_for('userform') }}">General Data Form</a>
+        <a href="{{ url_for('questionnaire') }}">Diagnostic Questions</a>
+		<a href="{{ url_for('prediction') }}">Predict My Chances</a>
+        <a href="{{ url_for('data') }}">Access Data</a>
+        <a href="{{ url_for('location') }}">Resources</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+
+	<button class="button-uniform" onclick="openNav()">☰</button>
+
+    <div class="heading-box">
+        <h1 style="text-align: center; font-family: Arial, sans-serif; color: #333; font-size: 24px; margin-top: 20px;">Lipidologists Near You</h1>
+    </div>
+    
+
+    <div id="map"></div>
+
+    <script>
+        var API_KEY = "{{ API_KEY }}";
+
+        function initMap() {
+            // Create a map object and specify the DOM element for display.
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: {{lat}}, lng: {{long}}}, // Centered at the equator
+                zoom: 10 // Zoomed out to show the world map
+            });
+            places_json = {{ places | tojson }};
+            places_json = JSON.parse(places_json);
+            // Loop through the places_json array and create a marker for each place
+            for (var i = 0; i < places_json.length; i++) {
+                var place = places_json[i];
+                var marker = new google.maps.Marker({
+                    position: {lat: parseFloat(place.geometry.location.lat), lng: parseFloat(place.geometry.location.lng)},
+                    map: map,
+                    title: place.name
+                });
+                // Create an InfoWindow for each marker
+                var infoWindow = new google.maps.InfoWindow({
+                    content: place.name + '<br>' + place.formatted_address
+                });
+
+                // Use an IIFE to create a new scope for each iteration of the loop
+                (function(marker, infoWindow) {
+                    // Add a click listener to the marker to open the InfoWindow
+                    marker.addListener('click', function() {
+                        infoWindow.open(map, marker);
+                    });
+                })(marker, infoWindow);
+            }
+        }
+
+		function openNav() {
+			document.getElementById("sidebar").style.width = "190px";
+			document.getElementById("main-content").style.marginLeft = "190px";
+		}
+		
+		function closeNav() {
+			document.getElementById("sidebar").style.width = "0";
+			document.getElementById("main-content").style.marginLeft = "0";
+		}
+	</script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key={{API_KEY}}&callback=initMap" async defer></script>
+    
+</body>
+</html>

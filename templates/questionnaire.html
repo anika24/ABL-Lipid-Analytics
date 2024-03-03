@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flask demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+</head>
+
+<body>
+    <div id="sidebar">
+        <a href="#" class="close-btn" onclick="closeNav()">&times;</a>
+        <a href="{{ url_for('userform') }}">General Data Form</a>
+        <a href="{{ url_for('questionnaire') }}">Diagnostic Questions</a>
+		<a href="{{ url_for('prediction') }}">Predict My Chances</a>
+        <a href="{{ url_for('data') }}">Access Data</a>
+        <a href="{{ url_for('location') }}">Resources</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+    <button class="button-uniform" onclick="openNav()">☰</button>
+
+    <div>
+        <div class="header">
+            <p class="lead text-dark justified-text" style = "font-size: 1.2em;">
+                There are some common symptoms of abetalipoproteinemia and related diseases. Please answer the following questions to help us
+                understand your condition better. If you have already submitted this form, your responses will be updated.
+            </p>
+            <p style="font-size: small; color: red;">
+                * Your answers will be documented and accessible to the public, but your personal identification will remain separate from your responses.
+            </p>
+        </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <div class="scrollable-form">
+                <p style="color: #cc0000; padding: 2px; font-size: 1.2em; font-weight: bold; text-align: center;">
+                    Scroll through the form and submit at the end!
+                </p>
+                <form action="{{ url_for('questionnaire')}}" method="post" class="custom-form">
+                    <label for="stool" class="form-label">Do you have black or tarry stool?</label> <br>
+                    <input type="radio" id="stool-yes" name="stool" value="Yes" required>
+                    <label for="stool-yes"> Yes</label>
+                    <input type="radio" id="stool-no" name="stool" value="No">
+                    <label for="stool-no"> No</label>
+                    <input type="radio" id="stool-unsure" name="stool" value="Unsure">
+                    <label for="stool-unsure"> Unsure</label> <br>
+
+                    <label for="vision" class="form-label">Do you struggle with a loss of color vision/night vision?</label> <br>
+                    <input type="radio" id="vision-yes" name="vision" value="Yes" required>
+                    <label for="vision-yes"> Yes</label>
+                    <input type="radio" id="vision-no" name="vision" value="No">
+                    <label for="vision-no"> No</label>
+                    <input type="radio" id="vision-unsure" name="vision" value="Unsure">
+                    <label for="vision-unsure"> Unsure</label> <br>
+
+                    <label for="sight" class="form-label">Do you have restriction in your visual field/acuity?</label> <br>
+                    <input type="radio" id="sight-yes" name="sight" value="Yes" required>
+                    <label for="sight-yes"> Yes</label>
+                    <input type="radio" id="sight-no" name="sight" value="No">
+                    <label for="sight-no"> No</label>
+                    <input type="radio" id="sight-unsure" name="sight" value="Unsure">
+                    <label for="sight-unsure"> Unsure</label> <br>
+
+                    <label for="bruise" class="form-label">Do you bruise easily?</label> <br>
+                    <input type="radio" id="bruise-yes" name="bruise" value="Yes" required>
+                    <label for="bruise-yes"> Yes</label>
+                    <input type="radio" id="bruise-no" name="bruise" value="No">
+                    <label for="bruise-no"> No</label>
+                    <input type="radio" id="bruise-unsure" name="bruise" value="Unsure">
+                    <label for="bruise-unsure"> Unsure</label> <br>
+
+                    <label for="muscle" class="form-label">Do you experience loss of muscle movement, muscle weakness, or coordination issues?</label> <br>
+                    <input type="radio" id="muscle-yes" name="muscle" value="Yes" required>
+                    <label for="muscle-yes"> Yes</label>
+                    <input type="radio" id="muscle-no" name="muscle" value="No">
+                    <label for="muscle-no"> No</label>
+                    <input type="radio" id="muscle-unsure" name="muscle" value="Unsure">
+                    <label for="muscle-unsure"> Unsure</label> <br>
+    
+                    <label for="cuts" class="form-label">Do you bleed excessively from cuts/wounds?</label> <br>
+                    <input type="radio" id="cuts-yes" name="cuts" value="Yes" required>
+                    <label for="cuts-yes"> Yes</label>
+                    <input type="radio" id="cuts-no" name="cuts" value="No">
+                    <label for="cuts-no"> No</label>
+                    <input type="radio" id="cuts-unsure" name="cuts" value="Unsure">
+                    <label for="cuts-unsure"> Unsure</label> <br>
+
+                    <label for="blood" class="form-label">Do you vomit with blood or notice blood in your urine?</label> <br>
+                    <input type="radio" id="blood-yes" name="blood" value="Yes" required>
+                    <label for="blood-yes"> Yes</label>
+                    <input type="radio" id="blood-no" name="blood" value="No">
+                    <label for="blood-no"> No</label>
+                    <input type="radio" id="blood-unsure" name="blood" value="Unsure" required>
+                    <label for="blood-unsure"> Unsure</label> <br>
+
+                    <label for="skin" class="form-label">Do you get frequent skin rashes or little red spots on your skin?</label> <br>
+                    <input type="radio" id="skin-yes" name="skin" value="Yes" required>
+                    <label for="skin-yes"> Yes</label>
+                    <input type="radio" id="skin-no" name="skin" value="No">
+                    <label for="skin-no"> No</label>
+                    <input type="radio" id="skin-unsure" name="skin" value="Unsure">
+                    <label for="skin-unsure"> Unsure </label> <br>
+
+                    <label for="nail" class="form-label">Have you ever observed blood clots under your fingernails?</label> <br>
+                    <input type="radio" id="nail-yes" name="nail" value="Yes" required>
+                    <label for="nail-yes"> Yes</label>
+                    <input type="radio" id="nail-no" name="nail" value="No">
+                    <label for="nail-no"> No</label>
+                    <input type="radio" id="nail-unsure" name="nail" value="Unsure">
+                    <label for="nail-unsure"> Unsure</label> <br>
+
+                    <label for="GI" class="form-label">Do you have sensitivities to garlic or onion?</label> <br>
+                    <input type="radio" id="GI-yes" name="GI" value="Yes" required>
+                    <label for="GI-yes"> Yes</label>
+                    <input type="radio" id="GI-no" name="GI" value="No">
+                    <label for="GI-no"> No</label>
+                    <input type="radio" id="GI-unsure" name="GI" value="Unsure">
+                    <label for="GI-unsure"> Unsure</label> <br>
+
+                    <label for="jaundice" class="form-label">Have you ever been suspected of having jaundice (yellow skin and yes, spider-like blood vessels, red and purple spots)?</label> <br>
+                    <input type="radio" id="jaundice-yes" name="jaundice" value="Yes" required>
+                    <label for="jaundice-yes"> Yes</label>
+                    <input type="radio" id="jaundice-no" name="jaundice" value="No">
+                    <label for="jaundice-no"> No</label>
+                    <input type="radio" id="jaundice-unsure" name="jaundice" value="Unsure">
+                    <label for="jaundice-unsure"> Unsure</label> <br>
+
+                    <label for="bloating" class="form-label">Do you experience frequent abdominal distension/bloating?</label> <br>
+                    <input type="radio" id="bloating-yes" name="bloating" value="Yes" required>
+                    <label for="bloating-yes"> Yes</label>
+                    <input type="radio" id="bloating-no" name="bloating" value="No">
+                    <label for="bloating-no"> No</label>
+                    <input type="radio" id="bloating-unsure" name="bloating" value="Unsure">
+                    <label for="bloating-unsure"> Unsure</label> <br>
+
+                    <label for="fat" class="form-label">Have you experienced trouble with trying to gain weight?</label> <br>
+                    <input type="radio" id="fat-yes" name="fat" value="Yes" required>
+                    <label for="fat-yes"> Yes</label>
+                    <input type="radio" id="fat-no" name="fat" value="No">
+                    <label for="fat-no"> No</label>
+                    <input type="radio" id="fat-unsure" name="fat" value="Unsure">
+                    <label for="fat-unsure"> Unsure</label> <br>
+
+                    <label for="reflex" class="form-label">Do you have delayed response to reflex tests (e.g. tendon reflex)?</label> <br>
+                    <input type="radio" id="reflex-yes" name="reflex" value="Yes" required>
+                    <label for="reflex-yes"> Yes</label>
+                    <input type="radio" id="reflex-no" name="reflex" value="No">
+                    <label for="reflex-no"> No</label>
+                    <input type="radio" id="reflex-unsure" name="reflex" value="Unsure">
+                    <label for="reflex-unsure"> Unsure</label> <br>
+
+                    <label for="lipid" class="form-label">Has a family member ever been diagnosed with low plasma levels of lipids, apoB, or fat-soluble vitamins?</label> <br>
+                    <input type="radio" id="lipid-yes" name="lipid" value="Yes" required>
+                    <label for="lipid-yes"> Yes</label>
+                    <input type="radio" id="lipid-no" name="lipid" value="No">
+                    <label for="lipid-no"> No</label>
+                    <input type="radio" id="lipid-unsure" name="lipid" value="Unsure">
+                    <label for="lipid-unsure"> Unsure</label> <br>
+                    <button type="submit" class="btn btn-primary">Submit</button> 
+                    </div>
+                </form>
+            </div>
+
+            <br>
+
+            <div style="text-align: center;">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div style="font-size: 18px; font-style: bold; color: rgb(66, 31, 100);">
+                        {{ message}}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+
+        </div>
+	</div>
+
+    <script>
+		function openNav() {
+			document.getElementById("sidebar").style.width = "190px";
+			document.getElementById("main-content").style.marginLeft = "190px";
+		}
+		
+		function closeNav() {
+			document.getElementById("sidebar").style.width = "0";
+			document.getElementById("main-content").style.marginLeft = "0";
+		}
+	</script>
+
+</body>
+
+</html>

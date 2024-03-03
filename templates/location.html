@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Address Locator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <style>
+        form {
+            justify-content: center;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            width: 350px; /* Adjusted width */
+            margin: 0 auto; /* Centering the form horizontally */
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 4px;
+            border: none;
+            color: #fff;
+            background-color: #007BFF;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        label {
+            font-size: 18px;
+            color: #550606;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 12px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            display: block;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-sizing: border-box; /* Ensure padding doesn't affect the width */
+            margin: 0 auto; /* Center the input box */
+            margin-bottom: 12px;
+            text-align: center; /* Centering the text within the input */
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="sidebar">
+        <a href="#" class="close-btn" onclick="closeNav()">&times;</a>
+        <a href="{{ url_for('userform') }}">General Data Form</a>
+        <a href="{{ url_for('questionnaire') }}">Diagnostic Questions</a>
+		<a href="{{ url_for('prediction') }}">Predict My Chances</a>
+        <a href="{{ url_for('data') }}">Access Data</a>
+        <a href="{{ url_for('location') }}">Resources</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+
+	<button class="button-uniform" onclick="openNav()">☰</button>
+
+    <form action="{{ url_for('map')}}" method="post">
+        <label for="location">Enter Your City </label>
+        <input type="text" name="location" id="location" placeholder="City Name"/>
+        <input type="submit" value="Submit"/>
+    </form>
+</body>
+<script>
+    function openNav() {
+        document.getElementById("sidebar").style.width = "190px";
+        document.getElementById("main-content").style.marginLeft = "190px";
+    }
+    
+    function closeNav() {
+        document.getElementById("sidebar").style.width = "0";
+        document.getElementById("main-content").style.marginLeft = "0";
+    }
+</script>
+
+</html>

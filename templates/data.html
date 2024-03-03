@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Address Locator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css')}}">
+    <style>
+        .button {
+            display: block;
+            width: 400px;
+            margin: 0 auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 20px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar">
+        <a href="#" class="close-btn" onclick="closeNav()">&times;</a>
+        <a href="{{ url_for('userform') }}">General Data Form</a>
+        <a href="{{ url_for('questionnaire') }}">Diagnostic Questions</a>
+		<a href="{{ url_for('prediction') }}">Predict My Chances</a>
+        <a href="{{ url_for('data') }}">Access Data</a>
+        <a href="{{ url_for('location') }}">Resources</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+    <button class="button-uniform" onclick="openNav()">☰</button>
+
+    <a href="{{ url_for('download_user_dataform') }}" class="button">Download General Data Form Responses</a> <br>
+    <a href="{{ url_for('download_questionnaire_responses') }}" class="button">Download Questionnaire Responses</a>
+
+</body>
+<script>
+    function openNav() {
+        document.getElementById("sidebar").style.width = "190px";
+        document.getElementById("main-content").style.marginLeft = "190px";
+    }
+    
+    function closeNav() {
+        document.getElementById("sidebar").style.width = "0";
+        document.getElementById("main-content").style.marginLeft = "0";
+    }
+</script>
+
+</html>

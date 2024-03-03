@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Login</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+	</head>
+	<body>
+
+    <div id="sidebar">
+      <a href="#" class="close-btn" onclick="closeNav()">&times;</a>
+      <a href="{{ url_for('index') }}">Home</a>
+    </div>
+
+
+    <button class="button-uniform" onclick="openNav()">☰</button>
+
+		<div class="register">
+			<h1>Login</h1>
+			<div class="links">
+				<a href="{{ url_for('login') }}" class="active">Login</a>
+				<a href="{{ url_for('signup') }}">Register</a>
+			</div>
+			<form action="{{ url_for('login') }}" method="POST">
+				<label for="username">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="username" placeholder="Username" id="username" required>
+				<label for="password">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="password" name="password" placeholder="Password" id="password" required>
+				<div class="msg">
+					{% with messages = get_flashed_messages() %}
+						{% if messages %}
+						{% for message in messages %}
+							<div class = "msg"> {{ message }}</div>
+						{% endfor %}
+						{% endif %}
+					{% endwith %}
+				</div>
+				<input type="submit" value="Login">
+			</form>
+		</div>
+	</body>
+
+    <script>
+		function openNav() {
+			document.getElementById("sidebar").style.width = "110px";
+			document.getElementById("main-content").style.marginLeft = "110px";
+		}
+		
+		function closeNav() {
+			document.getElementById("sidebar").style.width = "0";
+			document.getElementById("main-content").style.marginLeft = "0";
+		}
+	</script>
+
+</html>

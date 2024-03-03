@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Register</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+	</head>
+	<body>
+
+    <div id="sidebar">
+      <a href="#" class="close-btn" onclick="closeNav()">&times;</a>
+      <a href="{{ url_for('index') }}">Home</a>
+    </div>
+
+
+    <button class="button-uniform" onclick="openNav()">☰</button>
+
+		<div class="register">
+			<h1>Sign Up</h1>
+			<div class="links">
+				<a href="{{ url_for('login') }}">Login</a>
+				<a href="{{ url_for('signup') }}" class="active">Register</a>
+			</div>
+			<form action="{{ url_for('signup') }}" method="POST" autocomplete="off">
+				<label for="username">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="username" placeholder="Username" id="username" required>
+				<label for="password">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="password" name="password" placeholder="Password" id="password" required>
+				<label for="email">
+					<i class="fas fa-envelope"></i>
+				</label>
+				<input type="email" name="email" placeholder="Email" id="email" required>
+				<label for="abl_patient" class="mt-4" style = " width: 200px; height: 50px"> Are you an ABL patient?</label> <br>
+                    <input type="radio" id="abl-yes" name="abl" value="Yes" required>
+                    <label for="abl-yes" class="mt-4" style="background: none; border: none; color: black; width: 25px; height: 50px;" > Yes</label>
+                    <input type="radio" id="abl-no" name="abl" value="No">
+                    <label for="abl-no" class="mt-4" style="background: none; border: none; color: black; width: 25px; height: 50px;"  > No</label>
+				<div class="msg">
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              {% for message in messages %}
+                <div class = "msg"> {{ message }}</div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+        </div>
+				<input type="submit" value="Sign Up">
+			</form>
+		</div>
+	</body>
+
+  <script>
+		function openNav() {
+			document.getElementById("sidebar").style.width = "110px";
+			document.getElementById("main-content").style.marginLeft = "110px";
+		}
+		
+		function closeNav() {
+			document.getElementById("sidebar").style.width = "0";
+			document.getElementById("main-content").style.marginLeft = "0";
+		}
+	</script>
+
+</html>

@@ -1,0 +1,93 @@
+body {
+    background-color: rgb(188, 217, 231);
+}
+
+.scrollable-wrapper {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.scrollable-form {
+    width: 700px;
+    height: 400px;
+    overflow-y: auto;
+    background-color: white; /* White background inside scrollable area */
+    border: 2px solid #333; 
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.custom-form {
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem; 
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin-bottom: 15px; 
+}
+
+/* Style on focus */
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Style on invalid input */
+.form-control:invalid {
+    border-color: #dc3545;
+}
+
+/* Style on valid input */
+.form-control:valid {
+    border-color: #080908;
+}
+
+/* Add space between questions */
+label {
+    margin-bottom: 10px;
+}
+
+.form-label {
+    font-weight: bold; 
+    font-size: 16px; 
+    margin-bottom: 10px; 
+}
+
+.header {
+    display: flex;
+    flex-direction: column; /* Align items in a column */
+    justify-content: center;
+    align-items: center;
+    width: 700px;
+    height: 200px;
+    background-color: white; /* White background inside scrollable area */
+    border: 2px solid #333; 
+    border-radius: 10px;
+    padding: 20px;
+    margin: 0 auto; /* Centers the box horizontally */
+    position: relative; /* Needed for vertical centering */
+    top: 50%; /* Centers the box vertically */
+    margin-bottom:40px;
+}
+
+.justified-text {
+    margin: 5px;
+    text-align: justify;
+}
+
+.scrollable-form-pred {
+    width: 700px;
+    height: 300px;
+    overflow-y: auto;
+    background-color: white; /* White background inside scrollable area */
+    border: 2px solid #333; 
+    border-radius: 10px;
+    padding: 20px;
+}
